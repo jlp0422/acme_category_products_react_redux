@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 import { deleteProductFromServer } from './store/productReducer';
 
 const Products = ({products, categories, deleteProduct}) => {
-  if (!categories && !products) return null
   return (
     <ul className="list-group">
     {
-      products &&
+      products && categories &&
       products.map(product => (
         <li className="list-group-item" key={product.id}>
           {product.name} - Product&nbsp;&nbsp;

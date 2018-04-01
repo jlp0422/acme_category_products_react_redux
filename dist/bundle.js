@@ -28596,11 +28596,10 @@ var Products = function Products(_ref) {
       categories = _ref.categories,
       deleteProduct = _ref.deleteProduct;
 
-  if (!categories && !products) return null;
   return _react2.default.createElement(
     'ul',
     { className: 'list-group' },
-    products && products.map(function (product) {
+    products && categories && products.map(function (product) {
       return _react2.default.createElement(
         'li',
         { className: 'list-group-item', key: product.id },
