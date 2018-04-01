@@ -4,12 +4,13 @@ const path = require('path');
 const db = require('./db');
 const { Product, Category } = db.models
 
-app.use('/dist', express.static(path.join(__dirname, 'dist')))
+app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.use('/vendor', express.static(path.join(__dirname, 'node_modules')));
+
+app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')))
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`port: ${port}`))
-
-app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')))
 
 db.sync()
   .then(() => db.seed())
