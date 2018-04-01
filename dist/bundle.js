@@ -28587,41 +28587,23 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(14);
 
-var _productReducer = __webpack_require__(15);
+var _Product = __webpack_require__(143);
+
+var _Product2 = _interopRequireDefault(_Product);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Products = function Products(_ref) {
   var products = _ref.products,
-      categories = _ref.categories,
-      deleteProduct = _ref.deleteProduct;
+      categories = _ref.categories;
 
   return _react2.default.createElement(
-    'ul',
+    'div',
     { className: 'list-group' },
     products && products.map(function (product) {
-      return _react2.default.createElement(
-        'li',
-        { className: 'list-group-item', key: product.id },
-        product.name,
-        ' - Product\xA0\xA0',
-        _react2.default.createElement(
-          'button',
-          { onClick: function onClick() {
-              return deleteProduct(product.id);
-            } },
-          'Delete Product'
-        ),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement(
-          'p',
-          null,
-          categories.find(function (category) {
-            return category.id === product.categoryId;
-          }).name,
-          ' - Category'
-        )
-      );
+      return _react2.default.createElement(_Product2.default, { key: product.id, product: product, category: categories.find(function (c) {
+          return c.id === product.categoryId;
+        }) });
     })
   );
 }; /* eslint-disable */
@@ -28634,15 +28616,7 @@ var mapState = function mapState(_ref2) {
   return { products: products, categories: categories };
 };
 
-var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    deleteProduct: function deleteProduct(id) {
-      return dispatch((0, _productReducer.deleteProductFromServer)(id));
-    }
-  };
-};
-
-exports.default = (0, _reactRedux.connect)(mapState, mapDispatch)(Products);
+exports.default = (0, _reactRedux.connect)(mapState)(Products);
 
 /***/ }),
 /* 141 */
@@ -28708,6 +28682,64 @@ var thunk = createThunkMiddleware();
 thunk.withExtraArgument = createThunkMiddleware;
 
 exports['default'] = thunk;
+
+/***/ }),
+/* 143 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(14);
+
+var _productReducer = __webpack_require__(15);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Products = function Products(_ref) {
+  var product = _ref.product,
+      category = _ref.category,
+      deleteProduct = _ref.deleteProduct;
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'list-group-item' },
+    product.name,
+    ' - Product\xA0\xA0',
+    _react2.default.createElement(
+      'button',
+      { onClick: function onClick() {
+          return deleteProduct(product.id);
+        } },
+      'Delete Product'
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      category && category.name,
+      ' - Category'
+    )
+  );
+}; /* eslint-disable */
+
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    deleteProduct: function deleteProduct(id) {
+      return dispatch((0, _productReducer.deleteProductFromServer)(id));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(null, mapDispatch)(Products);
 
 /***/ })
 /******/ ]);
