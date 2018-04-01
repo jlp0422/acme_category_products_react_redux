@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Nav = () => {
+const Nav = ({state}) => {
+  console.log(state)
   return (
     <ul>
       <li>
@@ -10,4 +12,8 @@ const Nav = () => {
   )
 }
 
-export default Nav;
+const mapState = (state) => {
+  return { state }
+}
+
+export default connect(mapState)(Nav);
