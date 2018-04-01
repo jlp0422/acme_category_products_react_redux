@@ -22698,9 +22698,12 @@ var _Category = __webpack_require__(139);
 
 var _Category2 = _interopRequireDefault(_Category);
 
+var _Products = __webpack_require__(142);
+
+var _Products2 = _interopRequireDefault(_Products);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* eslint-disable */
 var App = function App() {
   return _react2.default.createElement(
     _reactRouterDom.HashRouter,
@@ -22712,6 +22715,7 @@ var App = function App() {
       _react2.default.createElement(
         _reactRouterDom.Switch,
         null,
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/products', component: _Products2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/categories/:id', render: function render(_ref) {
             var match = _ref.match;
             return _react2.default.createElement(_Category2.default, { id: match.params.id * 1 });
@@ -22719,8 +22723,7 @@ var App = function App() {
       )
     )
   );
-};
-
+}; /* eslint-disable */
 exports.default = App;
 
 /***/ }),
@@ -28612,6 +28615,48 @@ var thunk = createThunkMiddleware();
 thunk.withExtraArgument = createThunkMiddleware;
 
 exports['default'] = thunk;
+
+/***/ }),
+/* 142 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(22);
+
+__webpack_require__(25);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Products = function Products(_ref) {
+  var products = _ref.products,
+      categories = _ref.categories;
+
+  return _react2.default.createElement('hr', null);
+}; /* eslint-disable */
+
+
+var mapState = function mapState(_ref2) {
+  var products = _ref2.products,
+      categories = _ref2.categories;
+
+  return { products: products, categories: categories };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {};
+};
+
+exports.default = (0, _reactRedux.connect)(mapState, mapDispatch)(Products);
 
 /***/ })
 /******/ ]);
