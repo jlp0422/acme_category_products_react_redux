@@ -26379,7 +26379,7 @@ var Nav = function (_React$Component) {
       if (!products || !categories) return null;
       return _react2.default.createElement(
         'ul',
-        null,
+        { style: { margin: '20px 0px' } },
         _react2.default.createElement(
           'li',
           null,
@@ -28596,8 +28596,7 @@ var Products = function Products(_ref) {
       categories = _ref.categories,
       deleteProduct = _ref.deleteProduct;
 
-  // const cat = categories.find(category => category.id === 2)
-  // console.log(cat)
+  if (!categories && !products) return null;
   return _react2.default.createElement(
     'ul',
     { className: 'list-group' },
@@ -28606,7 +28605,7 @@ var Products = function Products(_ref) {
         'li',
         { className: 'list-group-item', key: product.id },
         product.name,
-        ' - Product',
+        ' - Product\xA0\xA0',
         _react2.default.createElement(
           'button',
           { onClick: function onClick() {
@@ -28614,7 +28613,15 @@ var Products = function Products(_ref) {
             } },
           'Delete Product'
         ),
-        _react2.default.createElement('br', null)
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'p',
+          null,
+          categories.find(function (category) {
+            return category.id === product.categoryId;
+          }).name,
+          ' - Category'
+        )
       );
     })
   );

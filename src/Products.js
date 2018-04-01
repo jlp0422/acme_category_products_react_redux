@@ -4,20 +4,19 @@ import { connect } from 'react-redux';
 import { deleteProductFromServer } from './store/productReducer';
 
 const Products = ({products, categories, deleteProduct}) => {
-  // const cat = categories.find(category => category.id === 2)
-  // console.log(cat)
+  if (!categories && !products) return null
   return (
     <ul className="list-group">
     {
       products &&
       products.map(product => (
         <li className="list-group-item" key={product.id}>
-          {product.name} - Product
+          {product.name} - Product&nbsp;&nbsp;
           <button onClick={() => deleteProduct(product.id)}>
             Delete Product
           </button>
           <br/>
-      {/*categories && categories.find(category => category.id === product.categoryId).name*/}
+          <p>{categories.find(category => category.id === product.categoryId).name} - Category</p>
         </li>
       ))
     }

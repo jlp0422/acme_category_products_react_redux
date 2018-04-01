@@ -16,7 +16,7 @@ class Nav extends React.Component {
     const { categories, products, createCategory } = this.props
     if (!products || !categories) return null
     return (
-      <ul>
+      <ul style={{ margin: '20px 0px'}}>
         <li>
           <button onClick={ createCategory }>Add Category</button>
         </li>
