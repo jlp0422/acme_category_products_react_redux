@@ -21,7 +21,7 @@ class Nav extends React.Component {
           <button onClick={ createCategory }>Add Category</button>
         </li>
         <Link to='/products'>
-          <li>All Products</li>
+          <li>All Products ({products.length})</li>
         </Link>
         {
           categories.map(c => (
@@ -36,7 +36,6 @@ class Nav extends React.Component {
 }
 
 const mapState = ({ products, categories}) => {
-  console.log(products)
   return { products, categories }
 }
 

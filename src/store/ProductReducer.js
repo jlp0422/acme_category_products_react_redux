@@ -19,12 +19,12 @@ export const getProductsFromServer = () => {
   }
 }
 
-export const createProductOnServer = () => {
+export const createProductOnServer = (id) => {
   return (dispatch) => {
-    return axios.post('/api/products')
+    return axios.post('/api/products', ({id}))
       .then( res => res.data)
       .then( product => dispatch(createProduct(product)))
-  }
+    }
 }
 
 
