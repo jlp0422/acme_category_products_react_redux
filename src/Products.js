@@ -7,7 +7,7 @@ const Products = ({products, categories, deleteProduct}) => {
   return (
     <ul className="list-group">
     {
-      products && categories &&
+      products &&
       products.map(product => (
         <li className="list-group-item" key={product.id}>
           {product.name} - Product&nbsp;&nbsp;

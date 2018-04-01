@@ -28599,7 +28599,7 @@ var Products = function Products(_ref) {
   return _react2.default.createElement(
     'ul',
     { className: 'list-group' },
-    products && categories && products.map(function (product) {
+    products && products.map(function (product) {
       return _react2.default.createElement(
         'li',
         { className: 'list-group-item', key: product.id },
