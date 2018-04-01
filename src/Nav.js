@@ -1,11 +1,13 @@
 /* eslint-disable */
 import React from 'react';
 import { connect } from 'react-redux';
-import { getProductsFromServer } from './store/ProductReducer';
+import { getProductsFromServer } from './store/productReducer';
+import { getCategoriesFromServer } from './store/categoryReducer';
 
 class Nav extends React.Component {
   componentDidMount() {
     this.props.getProducts()
+    // this.props.getCategories()
   }
   render() {
     console.log(this.props.products)
@@ -25,7 +27,8 @@ const mapState = ({ products, categories}) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getProducts: () => dispatch(getProductsFromServer())
+    getProducts: () => dispatch(getProductsFromServer()),
+    getCategories: () => dispatch(getCategoriesFromServer())
   }
 }
 
