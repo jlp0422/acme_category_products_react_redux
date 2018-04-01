@@ -35,7 +35,7 @@ class Nav extends React.Component {
   }
 }
 
-const mapState = ({ products, categories}) => {
+const mapState = ({ products, categories }) => {
   return { products, categories }
 }
 

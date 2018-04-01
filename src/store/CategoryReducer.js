@@ -4,10 +4,12 @@ import axios from 'axios';
 /************ ACTION CONSTANTS *************/
 const GET_CATEGORIES = 'GET_CATEGORIES';
 const CREATE_CATEGORY = 'CREATE_CATEGORY';
+const DELETE_CATEGORY = 'DELETE_CATEGORY';
 
 /************ ACTION CREATORS *************/
 const getCategories = (categories) => ({ type: GET_CATEGORIES, categories})
 const createCategory = (category) => ({ type: CREATE_CATEGORY, category })
+const deleteCategory = (id) => ({ type: DELETE_CATEGORY, id })
 
 /************ THUNKS *************/
 export const getCategoriesFromServer = () => {
@@ -26,6 +28,14 @@ export const createCategoryOnServer = () => {
   }
 }
 
+export const deleteCategoryOnServer = (id) => {
+  return (dispatch) => {
+    return axios.delete(`/api/categories/${id}`)
+      .then(() => dispatch(deleteCategory(id)))
+      .then(() => location.hash = '/')
+  }
+}
+
 
 /************ REDUCER *************/
 const categoryReducer = (state = [], action) => {
@@ -37,6 +47,10 @@ const categoryReducer = (state = [], action) => {
 
     case CREATE_CATEGORY:
       state = [...state, action.category]
+      break;
+
+    case DELETE_CATEGORY:
+      state = state.filter(category => category.id !== action.id)
       break;
 
   }

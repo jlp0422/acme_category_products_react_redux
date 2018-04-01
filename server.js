@@ -36,6 +36,13 @@ app.post('/api/categories', (req, res, next) => {
     .catch(next)
 })
 
+app.delete('/api/categories/:id', (req, res, next) => {
+  Category.findById(req.params.id)
+    .then(category => category.destroy())
+    .then(() => res.sendStatus(204))
+    .catch(next)
+})
+
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`port: ${port}`))
 

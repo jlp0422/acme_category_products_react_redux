@@ -3,7 +3,8 @@ import axios from 'axios';
 
 /************ ACTION CONSTANTS *************/
 const GET_PRODUCTS = 'GET_PRODUCTS';
-const CREATE_PRODUCT = 'CREATE_PRODUCT'
+const CREATE_PRODUCT = 'CREATE_PRODUCT';
+const DELETE_CATEGORY = 'DELETE_CATEGORY';
 
 /************ ACTION CREATORS *************/
 const getProducts = (products) => ({ type: GET_PRODUCTS, products })
@@ -39,6 +40,9 @@ const productReducer = (state = [], action) => {
     case CREATE_PRODUCT:
       state = [ ...state, action.product ]
       break;
+
+    case DELETE_CATEGORY:
+      state = state.filter(product => product.categoryId !== action.id)
   }
 
   return state;
