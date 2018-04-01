@@ -1,19 +1,32 @@
+/* eslint-disable */
 import React from 'react';
 import { connect } from 'react-redux';
+import { getProductsFromServer } from './store/ProductReducer';
 
-const Nav = ({state}) => {
-  console.log(state)
-  return (
-    <ul>
-      <li>
-        <button>Add Product</button>
-      </li>
-    </ul>
-  )
+class Nav extends React.Component {
+  componentDidMount() {
+    this.props.getProducts()
+  }
+  render() {
+    console.log(this.props.products)
+    return (
+      <ul>
+        <li>
+          <button>Add Product</button>
+        </li>
+      </ul>
+    )
+  }
 }
 
-const mapState = (state) => {
-  return { state }
+const mapState = ({ products, categories}) => {
+  return { products, categories }
 }
 
-export default connect(mapState)(Nav);
+const mapDispatch = (dispatch) => {
+  return {
+    getProducts: () => dispatch(getProductsFromServer())
+  }
+}
+
+export default connect(mapState, mapDispatch)(Nav);
