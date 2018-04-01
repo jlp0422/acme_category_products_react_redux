@@ -1,34 +1,50 @@
 /* eslint-disable */
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getProductsFromServer } from './store/productReducer';
-import { getCategoriesFromServer } from './store/categoryReducer';
+import { getCategoriesFromServer, createCategoryOnServer } from './store/categoryReducer';
 
 class Nav extends React.Component {
+
   componentDidMount() {
     this.props.getProducts()
-    // this.props.getCategories()
+    this.props.getCategories()
   }
+
   render() {
-    console.log(this.props.products)
+    const { categories, products, createCategory } = this.props
+    if (!products || !categories) return null
     return (
       <ul>
         <li>
-          <button>Add Product</button>
+          <button onClick={ createCategory }>Add Category</button>
         </li>
+        <Link to='/products'>
+          <li>All Products</li>
+        </Link>
+        {
+          categories.map(c => (
+            <Link key={c.id} to={`/categories/${c.id}`}>
+              <li key={c.id}>{c.name} - Category ({ products.filter(p => p.categoryId === c.id).length })</li>
+            </Link>
+          ))
+        }
       </ul>
     )
   }
 }
 
 const mapState = ({ products, categories}) => {
+  console.log(products)
   return { products, categories }
 }
 
 const mapDispatch = (dispatch) => {
   return {
     getProducts: () => dispatch(getProductsFromServer()),
-    getCategories: () => dispatch(getCategoriesFromServer())
+    getCategories: () => dispatch(getCategoriesFromServer()),
+    createCategory: () => dispatch(createCategoryOnServer())
   }
 }
 

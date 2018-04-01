@@ -15,18 +15,16 @@ const sync = () => {
   return conn.sync({ force: true })
 }
 
-const randomNum = Math.floor(Math.random() * 1000)
-
 const seed = () => {
   return Promise.all([
-    Category.create({ name: randomNum}),
-    Category.create({ name: randomNum }),
-    Category.create({ name: randomNum }),
-    Product.create({ name: randomNum }),
-    Product.create({ name: randomNum }),
-    Product.create({ name: randomNum }),
-    Product.create({ name: randomNum }),
-    Product.create({ name: randomNum }),
+    Category.create({ name: Math.floor(Math.random() * 1000)}),
+    Category.create({ name: Math.floor(Math.random() * 1000) }),
+    Category.create({ name: Math.floor(Math.random() * 1000) }),
+    Product.create({ name: Math.floor(Math.random() * 1000) }),
+    Product.create({ name: Math.floor(Math.random() * 1000) }),
+    Product.create({ name: Math.floor(Math.random() * 1000) }),
+    Product.create({ name: Math.floor(Math.random() * 1000) }),
+    Product.create({ name: Math.floor(Math.random() * 1000) }),
   ])
   .then(([ cat1, cat2, cat3, prod1, prod2, prod3, prod4, prod5]) => {
     prod1.setCategory(cat1)
