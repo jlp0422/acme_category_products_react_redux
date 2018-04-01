@@ -23,6 +23,13 @@ app.post('/api/products', (req, res, next) => {
     .catch(next)
 })
 
+app.delete('/api/products/:id', (req, res, next) => {
+  Product.findById(req.params.id)
+    .then( product => product.destroy())
+    .then(() => res.sendStatus(204))
+    .catch(next)
+})
+
 /************* CATEGORIES *************/
 app.get('/api/categories', (req, res, next) => {
   Category.findAll()

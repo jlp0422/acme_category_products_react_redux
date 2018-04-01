@@ -5,11 +5,12 @@ import axios from 'axios';
 const GET_PRODUCTS = 'GET_PRODUCTS';
 const CREATE_PRODUCT = 'CREATE_PRODUCT';
 const DELETE_CATEGORY = 'DELETE_CATEGORY';
+const DELETE_PRODUCT = 'DELETE_PRODUCT';
 
 /************ ACTION CREATORS *************/
 const getProducts = (products) => ({ type: GET_PRODUCTS, products })
 const createProduct = (product) => ({ type: CREATE_PRODUCT, product })
-
+const deleteProduct = (id) => ({ type: DELETE_PRODUCT, id })
 
 /************ THUNKS *************/
 export const getProductsFromServer = () => {
@@ -28,6 +29,14 @@ export const createProductOnServer = (id) => {
     }
 }
 
+export const deleteProductFromServer = (id) => {
+  return (dispatch) => {
+    return axios.delete(`/api/products/${id}`)
+      .then(() => dispatch(deleteProduct(id)))
+      .then(() => location.hash = '/products')
+  }
+}
+
 
 /************ REDUCER *************/
 const productReducer = (state = [], action) => {
@@ -43,6 +52,9 @@ const productReducer = (state = [], action) => {
 
     case DELETE_CATEGORY:
       state = state.filter(product => product.categoryId !== action.id)
+
+    case DELETE_PRODUCT:
+      state = state.filter(product => product.id !== action.id )
   }
 
   return state;
