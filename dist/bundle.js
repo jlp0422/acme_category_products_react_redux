@@ -26340,9 +26340,9 @@ var _reactRedux = __webpack_require__(11);
 
 var _reactRouterDom = __webpack_require__(32);
 
-var _productReducer = __webpack_require__(15);
+var _ProductReducer = __webpack_require__(15);
 
-var _categoryReducer = __webpack_require__(27);
+var _CategoryReducer = __webpack_require__(27);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26408,7 +26408,7 @@ var Nav = function (_React$Component) {
               'li',
               { key: c.id },
               c.name,
-              ' - Category (',
+              ' (',
               products.filter(function (p) {
                 return p.categoryId === c.id;
               }).length,
@@ -26433,13 +26433,13 @@ var mapState = function mapState(_ref) {
 var mapDispatch = function mapDispatch(dispatch) {
   return {
     getProducts: function getProducts() {
-      return dispatch((0, _productReducer.getProductsFromServer)());
+      return dispatch((0, _ProductReducer.getProductsFromServer)());
     },
     getCategories: function getCategories() {
-      return dispatch((0, _categoryReducer.getCategoriesFromServer)());
+      return dispatch((0, _CategoryReducer.getCategoriesFromServer)());
     },
     createCategory: function createCategory() {
-      return dispatch((0, _categoryReducer.createCategoryOnServer)());
+      return dispatch((0, _CategoryReducer.createCategoryOnServer)());
     }
   };
 };
@@ -28487,9 +28487,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(11);
 
-var _productReducer = __webpack_require__(15);
+var _ProductReducer = __webpack_require__(15);
 
-var _categoryReducer = __webpack_require__(27);
+var _CategoryReducer = __webpack_require__(27);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28530,13 +28530,12 @@ var Category = function Category(_ref) {
     ),
     _react2.default.createElement(
       'ul',
-      null,
+      { className: 'list-group' },
       prods.map(function (product) {
         return _react2.default.createElement(
           'li',
-          { key: product.id },
-          product.name,
-          ' - Product'
+          { className: 'list-group-item', key: product.id },
+          product.name
         );
       })
     )
@@ -28560,10 +28559,10 @@ var mapState = function mapState(_ref2, _ref3) {
 var mapDispatch = function mapDispatch(dispatch) {
   return {
     createProduct: function createProduct(id) {
-      return dispatch((0, _productReducer.createProductOnServer)(id));
+      return dispatch((0, _ProductReducer.createProductOnServer)(id));
     },
     deleteCategory: function deleteCategory(id) {
-      return dispatch((0, _categoryReducer.deleteCategoryOnServer)(id));
+      return dispatch((0, _CategoryReducer.deleteCategoryOnServer)(id));
     }
   };
 };
@@ -28635,7 +28634,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(11);
 
-var _productReducer = __webpack_require__(15);
+var _ProductReducer = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28647,8 +28646,13 @@ var Products = function Products(_ref) {
   return _react2.default.createElement(
     'div',
     { className: 'list-group-item' },
+    _react2.default.createElement(
+      'strong',
+      null,
+      'Product: '
+    ),
     product.name,
-    ' - Product\xA0\xA0',
+    '\xA0\xA0',
     _react2.default.createElement(
       'button',
       { onClick: function onClick() {
@@ -28659,8 +28663,12 @@ var Products = function Products(_ref) {
     _react2.default.createElement(
       'p',
       null,
-      category && category.name,
-      ' - Category'
+      _react2.default.createElement(
+        'strong',
+        null,
+        'Category: '
+      ),
+      category && category.name
     )
   );
 }; /* eslint-disable */
@@ -28669,7 +28677,7 @@ var Products = function Products(_ref) {
 var mapDispatch = function mapDispatch(dispatch) {
   return {
     deleteProduct: function deleteProduct(id) {
-      return dispatch((0, _productReducer.deleteProductFromServer)(id));
+      return dispatch((0, _ProductReducer.deleteProductFromServer)(id));
     }
   };
 };
@@ -28693,19 +28701,19 @@ var _reduxThunk = __webpack_require__(143);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _categoryReducer = __webpack_require__(27);
+var _CategoryReducer = __webpack_require__(27);
 
-var _categoryReducer2 = _interopRequireDefault(_categoryReducer);
+var _CategoryReducer2 = _interopRequireDefault(_CategoryReducer);
 
-var _productReducer = __webpack_require__(15);
+var _ProductReducer = __webpack_require__(15);
 
-var _productReducer2 = _interopRequireDefault(_productReducer);
+var _ProductReducer2 = _interopRequireDefault(_ProductReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var reducer = (0, _redux.combineReducers)({
-  categories: _categoryReducer2.default,
-  products: _productReducer2.default
+  categories: _CategoryReducer2.default,
+  products: _ProductReducer2.default
 });
 
 var store = (0, _redux.createStore)(reducer, (0, _redux.applyMiddleware)(_reduxThunk2.default));

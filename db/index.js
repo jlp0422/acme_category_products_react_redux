@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/demo_db', {
   logging: false
 });
+const faker = require('faker');
 
 const Category = conn.define('category', {
   name: Sequelize.STRING
@@ -17,14 +18,14 @@ const sync = () => {
 
 const seed = () => {
   return Promise.all([
-    Category.create({ name: Math.floor(Math.random() * 1000)}),
-    Category.create({ name: Math.floor(Math.random() * 1000) }),
-    Category.create({ name: Math.floor(Math.random() * 1000) }),
-    Product.create({ name: Math.floor(Math.random() * 1000) }),
-    Product.create({ name: Math.floor(Math.random() * 1000) }),
-    Product.create({ name: Math.floor(Math.random() * 1000) }),
-    Product.create({ name: Math.floor(Math.random() * 1000) }),
-    Product.create({ name: Math.floor(Math.random() * 1000) }),
+    Category.create({ name: faker.commerce.department() }),
+    Category.create({ name: faker.commerce.department() }),
+    Category.create({ name: faker.commerce.department() }),
+    Product.create({ name: faker.commerce.productName() }),
+    Product.create({ name: faker.commerce.productName() }),
+    Product.create({ name: faker.commerce.productName() }),
+    Product.create({ name: faker.commerce.productName() }),
+    Product.create({ name: faker.commerce.productName() }),
   ])
   .then(([ cat1, cat2, cat3, prod1, prod2, prod3, prod4, prod5]) => {
     prod1.setCategory(cat1)

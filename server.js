@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const db = require('./db');
 const { Product, Category } = db.models
+const faker = require('faker');
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/vendor', express.static(path.join(__dirname, 'node_modules')));
@@ -18,7 +19,7 @@ app.get('/api/products', (req, res, next) => {
 })
 
 app.post('/api/products', (req, res, next) => {
-  Product.create({ name: Math.floor(Math.random() * 1000), categoryId: req.body.id})
+  Product.create({ name: faker.commerce.productName(), categoryId: req.body.id})
     .then( product => res.send(product))
     .catch(next)
 })
@@ -38,7 +39,7 @@ app.get('/api/categories', (req, res, next) => {
 })
 
 app.post('/api/categories', (req, res, next) => {
-  Category.create({ name: Math.floor(Math.random() * 1000) })
+  Category.create({ name: faker.commerce.department()})
     .then(category => res.send(category))
     .catch(next)
 })

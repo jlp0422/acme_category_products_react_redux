@@ -2,8 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProductsFromServer } from './store/productReducer';
-import { getCategoriesFromServer, createCategoryOnServer } from './store/categoryReducer';
+import { getProductsFromServer } from './store/ProductReducer';
+import { getCategoriesFromServer, createCategoryOnServer } from './store/CategoryReducer';
 
 class Nav extends React.Component {
 
@@ -26,7 +26,7 @@ class Nav extends React.Component {
         {
           categories.map(c => (
             <Link key={c.id} to={`/categories/${c.id}`}>
-              <li key={c.id}>{c.name} - Category ({ products.filter(p => p.categoryId === c.id).length })</li>
+              <li key={c.id}>{c.name} ({ products.filter(p => p.categoryId === c.id).length })</li>
             </Link>
           ))
         }

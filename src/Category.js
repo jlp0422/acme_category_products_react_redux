@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createProductOnServer } from './store/productReducer';
-import { deleteCategoryOnServer } from './store/categoryReducer';
+import { createProductOnServer } from './store/ProductReducer';
+import { deleteCategoryOnServer } from './store/CategoryReducer';
 
 const Category = ({ category, prods, createProduct, deleteCategory }) => {
   if (!category) return null
@@ -11,10 +11,10 @@ const Category = ({ category, prods, createProduct, deleteCategory }) => {
       <button onClick={() => deleteCategory(category.id)}>Delete Category</button>
       <button onClick={() => createProduct(category.id) }>Add Product</button>
       <h2>Products</h2>
-      <ul>
+      <ul className="list-group">
       {
         prods.map(product => (
-          <li key={product.id}>{product.name} - Product</li>
+          <li className="list-group-item" key={product.id}>{product.name}</li>
         ))
       }
       </ul>
